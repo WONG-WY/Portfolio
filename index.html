@@ -85,6 +85,33 @@
   .font-serif { font-family: 'Newsreader', serif; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
   .glass-nav { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+
+  /* Dot grid background pattern */
+  .bg-dot-grid {
+    background-image: radial-gradient(circle, #7b573e18 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  /* Diagonal line accent */
+  .bg-line-accent {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 18px,
+      #7b573e08 18px,
+      #7b573e08 19px
+    );
+  }
+
+  /* Animated soft glow */
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-18px) scale(1.04); }
+  }
+  .float-slow { animation: float-slow 8s ease-in-out infinite; }
+  .float-slow-delayed { animation: float-slow 10s ease-in-out infinite 3s; }
+  .float-slow-alt { animation: float-slow 12s ease-in-out infinite 6s; }
+  .float-slow-alt2 { animation: float-slow 9s ease-in-out infinite 1.5s; }
 </style>
 </head>
 <body class="bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
@@ -92,13 +119,13 @@
 <!-- TopNavBar -->
 <nav class="fixed top-0 w-full z-50 bg-[#FEF9EF]/80 backdrop-blur-xl transition-all duration-300">
   <div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-6">
-    <a class="font-serif text-xl font-normal tracking-wide text-[#7B573E]" href="#">Wong Wing Yin</a>
+    <a class="font-serif text-3xl font-normal tracking-wide text-[#7B573E]" href="#">Rorina Wong</a>
     <div class="hidden md:flex items-center gap-10">
-      <a class="text-[#7B573E] border-b border-[#7B573E] pb-1 transition-colors duration-300" href="#projects">Projects</a>
-      <a class="text-[#353328]/60 hover:text-[#705771] transition-colors duration-300" href="#experience">Experience</a>
-      <a class="text-[#353328]/60 hover:text-[#705771] transition-colors duration-300" href="#contact">Contact</a>
+      <a class="text-lg text-[#7B573E] border-b border-[#7B573E] pb-1 transition-colors duration-300" href="#projects">Projects</a>
+      <a class="text-lg text-[#353328]/60 hover:text-[#705771] transition-colors duration-300" href="#experience">Experience</a>
+      <a class="text-lg text-[#353328]/60 hover:text-[#705771] transition-colors duration-300" href="#contact">Contact</a>
     </div>
-    <a class="px-5 py-2 border border-primary text-primary text-sm font-medium tracking-wide hover:bg-primary hover:text-on-primary transition-colors duration-200" href="#contact">
+    <a class="px-5 py-2 border border-primary text-primary text-lg font-medium tracking-wide hover:bg-primary hover:text-on-primary transition-colors duration-200" href="#contact">
       Get in Touch
     </a>
   </div>
@@ -107,173 +134,200 @@
 <main class="pt-24">
 
   <!-- Hero Section -->
-  <section class="min-h-[90vh] flex flex-col justify-center px-8 max-w-7xl mx-auto relative overflow-hidden">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-      <div class="lg:col-span-7 z-10">
-        <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl leading-[1.1] text-on-surface mb-8">
-          The art of <span class="italic text-primary">scalable</span> architecture.
-        </h1>
-        <p class="font-body text-xl md:text-2xl text-on-surface-variant max-w-2xl leading-relaxed mb-10">
-          Wong Wing Yin is a Software Developer weaving precision into code. Focused on building elegant solutions and robust systems that stand the test of time.
-        </p>
-        <div class="flex gap-4">
-          <a class="inline-flex items-center gap-2 group" href="#projects">
-            <span class="font-label uppercase tracking-widest text-sm font-bold text-primary group-hover:mr-2 transition-all">View Curated Works</span>
-            <span class="material-symbols-outlined text-primary">arrow_forward</span>
-          </a>
-        </div>
+  <section class="min-h-[90vh] flex flex-col justify-center px-8 max-w-5xl mx-auto relative overflow-hidden">
+
+    <!-- Background decorative layer -->
+    <div class="absolute inset-0 bg-dot-grid opacity-60 pointer-events-none"></div>
+
+    <!-- Floating circles: hero (top-right) -->
+    <div class="float-slow absolute right-16 top-24 w-56 h-56 rounded-full border border-primary/15 pointer-events-none"></div>
+    <div class="float-slow-delayed absolute right-28 top-36 w-36 h-36 rounded-full border border-primary/10 pointer-events-none"></div>
+    <div class="absolute right-12 top-20 w-72 h-72 bg-primary/5 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute -left-20 bottom-10 w-80 h-80 bg-secondary-container/25 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="float-slow absolute left-4 top-1/3 w-20 h-20 border border-outline-variant/30 rotate-45 pointer-events-none"></div>
+
+    <!-- Content -->
+    <div class="relative z-10">
+      <h1 class="font-serif text-6xl md:text-7xl lg:text-8xl leading-[1.15] text-on-surface mb-6">
+        Wong Wing Yin
+      </h1>
+      <div class="flex flex-wrap gap-3 mb-8">
+        <span class="inline-flex items-center gap-1.5 px-5 py-2 bg-primary/10 text-primary text-lg font-medium tracking-wide rounded-full border border-primary/20">Full-Stack Developer</span>
+        <span class="inline-flex items-center gap-1.5 px-5 py-2 bg-surface-container text-on-surface-variant text-lg font-medium tracking-wide rounded-full border border-outline/20">Node.js</span>
+        <span class="inline-flex items-center gap-1.5 px-5 py-2 bg-surface-container text-on-surface-variant text-lg font-medium tracking-wide rounded-full border border-outline/20">Java</span>
+        <span class="inline-flex items-center gap-1.5 px-5 py-2 bg-surface-container text-on-surface-variant text-lg font-medium tracking-wide rounded-full border border-outline/20">Azure</span>
       </div>
-      <div class="lg:col-span-5 relative">
-        <div class="aspect-[4/5] rounded-xl overflow-hidden bg-surface-container-low shadow-xl">
-          <img class="w-full h-full object-cover grayscale-[0.2] contrast-[1.1]"
-               alt="Abstract digital art featuring warm terracotta and beige organic shapes layered to represent complex system architecture and flow"
-               src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCUdjs7vgVDEiVSf4MCCtmIIcAurrtCIIplWKNesM7lOkqsqp4a6NHNjvrPBkxDptfmIkD3msLC8J0Xoo1E4u0EI9EbJjf5qNXRcjDw6bbI9yc2DUmOzi-p9jfWhjlObQWJ73mFDcV6soUWvrYyX8KV6DlEgOvjKDJCLx7hjM1i31vhlfDjkTmS0F_ZJkuWAaZfG1EFCO7jDEmhxXEDJxdurntpFO3RY9T5SzdeQnn5ZG5rfIfaYUk538E6cmr2r13JSZhvxKbxxdy"/>
-        </div>
-        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-secondary-container/30 rounded-full blur-3xl"></div>
+      <p class="font-body text-2xl md:text-3xl text-on-surface-variant max-w-5xl leading-relaxed mb-6">
+        A programmer passionate about full-stack development and cloud systems. Bridging technical precision with real-world impact.
+      </p>
+      <p class="font-body text-lg text-on-surface-variant max-w-2xl leading-relaxed mb-10">
+        B.Sc. Computer Science · HKBU · Exchange @ OTH Regensburg
+      </p>
+      <div class="flex flex-wrap gap-6 items-center">
+        <a class="inline-flex items-center gap-2 group" href="#projects">
+          <span class="font-label uppercase tracking-widest text-lg font-bold text-primary group-hover:mr-2 transition-all">View My Project</span>
+          <span class="material-symbols-outlined text-primary">arrow_forward</span>
+        </a>
       </div>
     </div>
   </section>
 
   <!-- Featured Projects (Bento Grid) -->
-  <section class="py-32 bg-surface-container-low/50" id="projects">
-    <div class="max-w-7xl mx-auto px-8">
+  <section class="py-32 bg-surface-container-low/50 relative" id="projects">
+    <div class="absolute inset-0 bg-line-accent opacity-50 pointer-events-none"></div>
+    <!-- Floating circles: projects (bottom-left) -->
+    <div class="float-slow-delayed absolute -left-10 bottom-16 w-64 h-64 rounded-full border border-secondary/12 pointer-events-none"></div>
+    <div class="float-slow absolute -left-4 bottom-24 w-40 h-40 rounded-full border border-secondary/10 pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-8 relative z-10">
       <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
         <div class="max-w-xl">
-          <span class="font-label uppercase tracking-[0.2em] text-sm text-secondary mb-4 block">Selected Works</span>
-          <h2 class="font-serif text-5xl md:text-6xl text-on-surface italic">A Gallery of Functional Craft</h2>
+
+          <h2 class="font-serif text-7xl md:text-8xl text-on-surface italic">My Projects</h2>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="flex flex-col gap-4">
 
-        <!-- Project 1: Privacy Gateway -->
-        <div class="group flex flex-col bg-surface-container-lowest rounded-none overflow-hidden transition-all duration-500 hover:shadow-lg">
-          <div class="aspect-video overflow-hidden">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                 alt="Stylized architectural diagram of a cloud network gateway with blue and gold glowing lines representing data security and routing"
-                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgWk9yxF-pMrJCSP-d_wgwZHfRR_eVSBYkJw1fUa7ZhpH4nccdsi8weSoCuHv14BJK308ao7RNWkSPWlVWsDQxRnvmta2d5s9oKmAzvG81bjcUhA2t-t_rTV2RolTlfsiZLwsbsSv17w5dtu1nEAbd57N8HUXoLye_h9SR63Gl9OMN3xaIfGIC50y4E9TEJloVwBJLdLHGvTcaQnCFon85YnVUhW7neG-WU9jg1nkOuUTwSPok-DsJo0ddkVMxZRls6bCz-pfYA28i"/>
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <h3 class="font-serif text-2xl text-on-surface mb-3">Privacy Gateway on Microsoft Azure</h3>
-            <p class="text-on-surface-variant mb-6 flex-grow leading-relaxed">
-              Deployed an OpenVPN server on an Azure VM to establish encrypted tunnels and mask client IPs. Integrated a Pi-hole DNS sinkhole with a ~180,000-domain blocklist to block ads and minimize latency. Validated IP masking and ad-blocking effectiveness through end-to-end testing with third-party tools.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">Azure VM</span>
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">OpenVPN</span>
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">Pi-hole</span>
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">Linux</span>
+        <!-- Project 1 -->
+        <a href="project-privacy-gateway.html" class="group flex items-center justify-between px-8 py-7 bg-surface-container-lowest border border-outline-variant/20 hover:bg-surface-container hover:border-primary/30 transition-all duration-300">
+          <div>
+            <h3 class="font-serif text-4xl text-on-surface mb-2 group-hover:text-primary transition-colors duration-200">Privacy Gateway on Microsoft Azure</h3>
+            <p class="text-lg text-on-surface-variant mb-2">IP masking &amp; ad-blocking gateway</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">Azure VM</span>
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">OpenVPN</span>
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">Pi-hole</span>
             </div>
           </div>
-        </div>
+          <span class="material-symbols-outlined text-primary text-3xl opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">arrow_forward</span>
+        </a>
 
-        <!-- Project 2: Decision-Support Tool -->
-        <div class="group flex flex-col bg-surface-container-lowest rounded-none overflow-hidden transition-all duration-500 hover:shadow-lg lg:mt-12">
-          <div class="aspect-video overflow-hidden">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                 alt="Clean professional dashboard interface with elegant charts and minimalist data visualizations in soft earthy tones"
-                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYNr-9gs0F2O5M520C3uZ7U1FJDyJz9Yg33oOLNhlDoqCopf-qnNarc3X7Ob_EJv8O911n1AGiS9bnW_qrTE35_kZVkY9H1hyCEDhpGxNlGp6pAPi7rRbzydd7KkR4oWAUVN1DSwjDy1jam1RZg83rDgqxOwZnpl_aeFRw0pdC7htSi_AF2Bn5KDzsPoOvviD_ROlsJP_x838x0gk_GMl3TyvIgnAaKyrYRvQVG2AbYw1MjxMRsM4aXIZwfBJpjVuInMhsygvueXAr"/>
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <h3 class="font-serif text-2xl text-on-surface mb-3">Full-Stack School Decision-Support Tool</h3>
-            <p class="text-on-surface-variant mb-6 flex-grow leading-relaxed">
-              Built a Vue.js and Node.js platform integrating government APIs for real-time school data comparison. Implemented Auth0 Headless Authentication (ROPC) to secure APIs with JWTs and retain custom UI. Engineered a dual-write mechanism via Express.js to sync MongoDB as the single Source of Truth.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">Vue.js</span>
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">Node.js</span>
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">Auth0</span>
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">MongoDB</span>
+        <!-- Project 2 -->
+        <a href="project-decision-support.html" class="group flex items-center justify-between px-8 py-7 bg-surface-container-lowest border border-outline-variant/20 hover:bg-surface-container hover:border-primary/30 transition-all duration-300">
+          <div>
+            <h3 class="font-serif text-4xl text-on-surface mb-2 group-hover:text-primary transition-colors duration-200">Full-Stack School Decision-Support Tool</h3>
+            <p class="text-lg text-on-surface-variant mb-2">Real-time school comparison platform for smarter decisions</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">Vue.js</span>
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">Node.js</span>
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">Express</span>
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">Auth0</span>
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">MongoDB</span>
             </div>
           </div>
-        </div>
+          <span class="material-symbols-outlined text-primary text-3xl opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">arrow_forward</span>
+        </a>
 
-        <!-- Project 3: Real-Time Painting App -->
-        <div class="group flex flex-col bg-surface-container-lowest rounded-none overflow-hidden transition-all duration-500 hover:shadow-lg">
-          <div class="aspect-video overflow-hidden">
-            <img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                 alt="Colorful abstract brushstrokes intersecting on a dark canvas, symbolizing real-time collaborative creativity"
-                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUnBPpHc6kbFDUfSqvLqqNPsGQmxkdE3KTVZfQaBI7ya0LQbLp2IsGh_jE2J2mI1hwEOuA77dbyiSfqvsURr1ynU13C7k1r1x2I0gjEtKrnm84zycgdH7deyd1PnA_1k5ih_ODhvZt6grZG1-ZBpI_W-8wJrBU-tdIsqThajMUoFmspH8Y6582qBSjsq7oW-t80O9R2qeDNdwK57nKkA-hR2PvLwG-0DClCau9VyG01pI_rqCcMF12wGkiQV8xYkeM-VTHqhVhHE2L"/>
-          </div>
-          <div class="p-8 flex flex-col flex-grow">
-            <h3 class="font-serif text-2xl text-on-surface mb-3">Real-Time Synchronized Painting App</h3>
-            <p class="text-on-surface-variant mb-6 flex-grow leading-relaxed">
-              Engineered a backend server to convert a single-player app into a real-time multiplayer canvas. Utilized Java Sockets to efficiently handle concurrent client connections and data synchronization. Led server-side development and system integration to ensure timely project completion.
-            </p>
-            <div class="flex flex-wrap gap-2">
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">Java</span>
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">WebSockets</span>
-              <span class="px-3 py-1 bg-surface-container-highest text-on-surface-variant text-xs font-medium tracking-wide">Multithreading</span>
+        <!-- Project 3 -->
+        <a href="project-painting-app.html" class="group flex items-center justify-between px-8 py-7 bg-surface-container-lowest border border-outline-variant/20 hover:bg-surface-container hover:border-primary/30 transition-all duration-300">
+          <div>
+            <h3 class="font-serif text-4xl text-on-surface mb-2 group-hover:text-primary transition-colors duration-200">Real-Time Synchronized Painting App</h3>
+            <p class="text-lg text-on-surface-variant mb-2">Multiplayer collaborative canvas with live synchronization</p>
+            <div class="flex flex-wrap gap-2 mt-3">
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">Java</span>
+              <span class="inline-flex px-3 py-1 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide rounded-full border border-outline/20">Sockets</span>
             </div>
           </div>
-        </div>
+          <span class="material-symbols-outlined text-primary text-3xl opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">arrow_forward</span>
+        </a>
 
       </div>
     </div>
   </section>
 
   <!-- Experience & Education -->
-  <section class="py-32 px-8 max-w-7xl mx-auto" id="experience">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
-      <div class="lg:col-span-4">
-        <h2 class="font-serif text-5xl text-on-surface sticky top-32">The Professional Journey</h2>
-      </div>
-      <div class="lg:col-span-8 space-y-24">
+  <section class="py-32 px-8 w-4/5 mx-auto relative overflow-hidden" id="experience">
+    <!-- Floating circles: experience (top-right) -->
+    <div class="float-slow-alt absolute -right-12 top-20 w-52 h-52 rounded-full border border-primary/12 pointer-events-none"></div>
+    <div class="float-slow absolute -right-4 top-32 w-32 h-32 rounded-full border border-primary/8 pointer-events-none"></div>
+    <h2 class="font-serif text-7xl text-on-surface mb-12">The Professional Journey</h2>
 
-        <!-- Work Experience -->
-        <div>
-          <h3 class="font-label uppercase tracking-widest text-xs text-secondary font-bold mb-12 border-b border-outline-variant/20 pb-4">Professional Tenure</h3>
-          <div class="space-y-16">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div class="text-on-surface-variant font-label text-sm uppercase tracking-tighter">Jun – Aug 2024</div>
-              <div class="md:col-span-3">
-                <h4 class="text-2xl font-serif text-on-surface">Summer Intern, Backend Team</h4>
-                <p class="italic text-primary mb-4">Midland Holdings Limited · Digital Development Department</p>
-                <ul class="text-on-surface-variant leading-relaxed space-y-2 list-disc list-inside">
-                  <li>Developed Node.js and MongoDB scripts to automate data extraction and generate Excel reports</li>
-                  <li>Maintained database consistency by writing Mongosh scripts for batch updates via external Excel files</li>
-                  <li>Automated property image processing with scripts to batch-apply watermarks for daily operations</li>
-                </ul>
-              </div>
+    <!-- Work Experience -->
+    <div class="mb-6">
+      <h3 class="font-label uppercase tracking-widest text-base text-secondary font-bold mb-4">Work Experience</h3>
+      <div class="flex flex-col gap-3">
+
+        <div class="border border-outline-variant/20 bg-surface-container-lowest overflow-hidden">
+          <button onclick="toggleExp('exp1')" class="w-full flex items-center justify-between px-8 py-6 text-left hover:bg-surface-container transition-colors duration-200">
+            <div>
+              <span class="font-label text-base text-on-surface-variant uppercase tracking-tighter block mb-1">Jun – Aug 2024</span>
+              <span class="font-serif text-4xl text-on-surface">Summer Intern, Backend Team</span>
+              <span class="italic text-primary text-lg block mt-1">Midland Holdings Limited · Digital Development Department</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div class="text-on-surface-variant font-label text-sm uppercase tracking-tighter">Sep 2023 – Feb 2025</div>
-              <div class="md:col-span-3">
-                <h4 class="text-2xl font-serif text-on-surface">Student Helper</h4>
-                <p class="italic text-primary mb-4">Hong Kong Baptist University · Leadership Qualities Centre</p>
-                <ul class="text-on-surface-variant leading-relaxed space-y-2 list-disc list-inside">
-                  <li>Managed venue setups and provided technical support for seamless user experience integration</li>
-                  <li>Facilitated hands-on workshops across multiple domains through strong cross-disciplinary teamwork</li>
-                </ul>
-              </div>
-            </div>
+            <span id="exp1-icon" class="material-symbols-outlined text-primary text-3xl ml-6 shrink-0">add</span>
+          </button>
+          <div id="exp1" class="hidden px-8 pb-8 border-t border-outline-variant/10">
+            <ul class="text-lg text-on-surface-variant leading-relaxed space-y-2 list-disc list-inside mt-6">
+              <li>Developed Node.js and MongoDB scripts to automate data extraction and generate Excel reports</li>
+              <li>Maintained database consistency by writing Mongosh scripts for batch updates via external Excel files</li>
+              <li>Automated property image processing with scripts to batch-apply watermarks for daily operations</li>
+            </ul>
           </div>
         </div>
 
-        <!-- Education -->
-        <div>
-          <h3 class="font-label uppercase tracking-widest text-xs text-secondary font-bold mb-12 border-b border-outline-variant/20 pb-4">Academic Foundation</h3>
-          <div class="space-y-16">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div class="text-on-surface-variant font-label text-sm uppercase tracking-tighter">Sep 2023 – Jul 2025</div>
-              <div class="md:col-span-3">
-                <h4 class="text-2xl font-serif text-on-surface">B.Sc. in Computer Science</h4>
-                <p class="text-on-surface-variant">Hong Kong Baptist University, Hong Kong · <span class="italic">Minor: Finance</span></p>
-              </div>
+        <div class="border border-outline-variant/20 bg-surface-container-lowest overflow-hidden">
+          <button onclick="toggleExp('exp2')" class="w-full flex items-center justify-between px-8 py-6 text-left hover:bg-surface-container transition-colors duration-200">
+            <div>
+              <span class="font-label text-base text-on-surface-variant uppercase tracking-tighter block mb-1">Sep 2023 – Feb 2025</span>
+              <span class="font-serif text-4xl text-on-surface">Student Helper</span>
+              <span class="italic text-primary text-lg block mt-1">Hong Kong Baptist University · Leadership Qualities Centre</span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div class="text-on-surface-variant font-label text-sm uppercase tracking-tighter">Spring 2025</div>
-              <div class="md:col-span-3">
-                <h4 class="text-2xl font-serif text-on-surface">Exchange Semester — Computer Science &amp; Mathematics</h4>
-                <p class="text-on-surface-variant">OTH Regensburg, Germany</p>
-              </div>
+            <span id="exp2-icon" class="material-symbols-outlined text-primary text-3xl ml-6 shrink-0">add</span>
+          </button>
+          <div id="exp2" class="hidden px-8 pb-8 border-t border-outline-variant/10">
+            <ul class="text-lg text-on-surface-variant leading-relaxed space-y-2 list-disc list-inside mt-6">
+              <li>Managed venue setups and provided technical support for seamless user experience integration</li>
+              <li>Facilitated hands-on workshops across multiple domains through strong cross-disciplinary teamwork</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div>
+      <h3 class="font-label uppercase tracking-widest text-base text-secondary font-bold mb-4">Academic Foundation</h3>
+      <div class="flex flex-col gap-3">
+
+        <div class="border border-outline-variant/20 bg-surface-container-lowest overflow-hidden">
+          <button onclick="toggleExp('edu1')" class="w-full flex items-center justify-between px-8 py-6 text-left hover:bg-surface-container transition-colors duration-200">
+            <div>
+              <span class="font-label text-base text-on-surface-variant uppercase tracking-tighter block mb-1">Sep 2023 – Jul 2025</span>
+              <span class="font-serif text-4xl text-on-surface">B.Sc. in Computer Science</span>
+              <span class="text-primary text-lg block mt-1">Hong Kong Baptist University · <span class="italic">Minor: Finance</span></span>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div class="text-on-surface-variant font-label text-sm uppercase tracking-tighter">Sep 2021 – Jul 2023</div>
-              <div class="md:col-span-3">
-                <h4 class="text-2xl font-serif text-on-surface">B.Comp. in Internet Technology</h4>
-                <p class="text-on-surface-variant">Hong Kong Metropolitan University, Hong Kong</p>
-              </div>
+            <span id="edu1-icon" class="material-symbols-outlined text-primary text-3xl ml-6 shrink-0">add</span>
+          </button>
+          <div id="edu1" class="hidden px-8 pb-8 border-t border-outline-variant/10">
+            <p class="text-lg text-on-surface-variant mt-6">Hong Kong Baptist University, Hong Kong</p>
+          </div>
+        </div>
+
+        <div class="border border-outline-variant/20 bg-surface-container-lowest overflow-hidden">
+          <button onclick="toggleExp('edu2')" class="w-full flex items-center justify-between px-8 py-6 text-left hover:bg-surface-container transition-colors duration-200">
+            <div>
+              <span class="font-label text-base text-on-surface-variant uppercase tracking-tighter block mb-1">Spring 2025</span>
+              <span class="font-serif text-4xl text-on-surface">Exchange Semester — Computer Science &amp; Mathematics</span>
+              <span class="text-primary text-lg block mt-1">OTH Regensburg, Germany</span>
             </div>
+            <span id="edu2-icon" class="material-symbols-outlined text-primary text-3xl ml-6 shrink-0">add</span>
+          </button>
+          <div id="edu2" class="hidden px-8 pb-8 border-t border-outline-variant/10">
+            <p class="text-lg text-on-surface-variant mt-6">OTH Regensburg, Germany</p>
+          </div>
+        </div>
+
+        <div class="border border-outline-variant/20 bg-surface-container-lowest overflow-hidden">
+          <button onclick="toggleExp('edu3')" class="w-full flex items-center justify-between px-8 py-6 text-left hover:bg-surface-container transition-colors duration-200">
+            <div>
+              <span class="font-label text-base text-on-surface-variant uppercase tracking-tighter block mb-1">Sep 2021 – Jul 2023</span>
+              <span class="font-serif text-4xl text-on-surface">B.Comp. in Internet Technology</span>
+              <span class="text-primary text-lg block mt-1">Hong Kong Metropolitan University, Hong Kong</span>
+            </div>
+            <span id="edu3-icon" class="material-symbols-outlined text-primary text-3xl ml-6 shrink-0">add</span>
+          </button>
+          <div id="edu3" class="hidden px-8 pb-8 border-t border-outline-variant/10">
+            <p class="text-lg text-on-surface-variant mt-6">Hong Kong Metropolitan University, Hong Kong</p>
           </div>
         </div>
 
@@ -282,61 +336,64 @@
   </section>
 
   <!-- Technical Skills -->
-  <section class="py-32 bg-surface-container">
-    <div class="px-8 max-w-7xl mx-auto">
+  <section class="py-32 bg-surface-container relative overflow-hidden">
+    <!-- Floating circles: skills (bottom-right) -->
+    <div class="float-slow-delayed absolute -right-16 bottom-12 w-60 h-60 rounded-full border border-tertiary/15 pointer-events-none"></div>
+    <div class="float-slow absolute -right-8 bottom-20 w-36 h-36 rounded-full border border-tertiary/10 pointer-events-none"></div>
+    <div class="px-8 max-w-7xl mx-auto relative z-10">
       <div class="flex flex-col mb-20">
-        <span class="font-label uppercase tracking-[0.2em] text-sm text-secondary mb-4 block">Expertise</span>
-        <h2 class="font-serif text-5xl italic text-on-surface mb-6">Technical Vocabulary</h2>
-        <p class="text-on-surface-variant max-w-xl">The languages I speak to machines, and the ones I use with humans.</p>
+        <h2 class="font-serif text-7xl italic text-on-surface mb-6">Expertise</h2>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="p-8 bg-surface rounded-none hover:bg-surface-container-lowest transition-colors border border-outline-variant/10">
           <span class="material-symbols-outlined text-primary mb-6">code</span>
-          <h4 class="font-serif text-xl mb-4">Programming</h4>
-          <span class="text-sm font-label text-on-surface-variant">Java, Python, JavaScript, C, MySQL, MQL</span>
+          <h4 class="font-serif text-3xl mb-4">Programming</h4>
+          <span class="text-lg font-label text-on-surface-variant">Java, Python, JavaScript, C, MySQL, MQL</span>
         </div>
         <div class="p-8 bg-surface rounded-xl hover:bg-surface-container-lowest transition-colors border border-outline-variant/10 lg:mt-8">
           <span class="material-symbols-outlined text-primary mb-6">web</span>
-          <h4 class="font-serif text-xl mb-4">Frameworks</h4>
-          <span class="text-sm font-label text-on-surface-variant">Vue.js, Node.js, HTML, CSS</span>
+          <h4 class="font-serif text-3xl mb-4">Frameworks</h4>
+          <span class="text-lg font-label text-on-surface-variant">Vue.js, Node.js, HTML, CSS</span>
         </div>
         <div class="p-8 bg-surface rounded-none hover:bg-surface-container-lowest transition-colors border border-outline-variant/10">
           <span class="material-symbols-outlined text-primary mb-6">cloud_queue</span>
-          <h4 class="font-serif text-xl mb-4">Software &amp; Platforms</h4>
-          <span class="text-sm font-label text-on-surface-variant">GitHub, Docker/Docker Hub, Microsoft Azure/Azure CLI, MongoDB, Figma</span>
+          <h4 class="font-serif text-3xl mb-4">Software &amp; Platforms</h4>
+          <span class="text-lg font-label text-on-surface-variant">GitHub, Docker/Docker Hub, Microsoft Azure/Azure CLI, MongoDB, Figma</span>
         </div>
         <div class="p-8 bg-surface rounded-xl hover:bg-surface-container-lowest transition-colors border border-outline-variant/10 lg:mt-8">
           <span class="material-symbols-outlined text-primary mb-6">translate</span>
-          <h4 class="font-serif text-xl mb-4">Languages</h4>
-          <span class="text-sm font-label text-on-surface-variant">Cantonese (Native), Mandarin (Fluent), English (Fluent), German (A1)</span>
+          <h4 class="font-serif text-3xl mb-4">Languages</h4>
+          <span class="text-lg font-label text-on-surface-variant">Cantonese (Native), Mandarin (Fluent), English (Fluent), German (A1)</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Certifications -->
-  <section class="py-24 px-8 max-w-7xl mx-auto">
+  <section class="py-24 px-8 max-w-7xl mx-auto relative overflow-hidden">
+    <!-- Floating circles: certifications (top-left) -->
+    <div class="float-slow absolute -left-14 top-10 w-56 h-56 rounded-full border border-outline-variant/20 pointer-events-none"></div>
+    <div class="float-slow-delayed absolute -left-6 top-20 w-32 h-32 rounded-full border border-outline-variant/15 pointer-events-none"></div>
     <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
       <div>
-        <span class="font-label uppercase tracking-[0.2em] text-sm text-secondary mb-4 block">Recognition</span>
-        <h2 class="font-serif text-5xl text-on-surface italic">Certifications</h2>
+        <h2 class="font-serif text-7xl text-on-surface italic">Certifications</h2>
       </div>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       <div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
         <span class="material-symbols-outlined text-primary mb-4">workspace_premium</span>
-        <h4 class="font-serif text-xl text-on-surface mb-2">Continuous Learning Centre<br>Hands-on UI/UX Workshop</h4>
-        <p class="text-sm text-on-surface-variant font-label">Jan 2024</p>
+        <h4 class="font-serif text-3xl text-on-surface mb-2">Continuous Learning Centre<br>Hands-on UI/UX Workshop</h4>
+        <p class="text-lg text-on-surface-variant font-label">Jan 2024</p>
       </div>
       <div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
         <span class="material-symbols-outlined text-primary mb-4">security</span>
-        <h4 class="font-serif text-xl text-on-surface mb-2">Hong Kong Cyber Security Capture the Flag Challenge</h4>
-        <p class="text-sm text-on-surface-variant font-label">Dec 2022</p>
+        <h4 class="font-serif text-3xl text-on-surface mb-2">Hong Kong Cyber Security Capture the Flag Challenge</h4>
+        <p class="text-lg text-on-surface-variant font-label">Dec 2022</p>
       </div>
       <div class="p-8 bg-surface-container-lowest rounded-xl border border-outline-variant/10">
         <span class="material-symbols-outlined text-primary mb-4">emoji_events</span>
-        <h4 class="font-serif text-xl text-on-surface mb-2">PwC HackaDay CTF Competition</h4>
-        <p class="text-sm text-on-surface-variant font-label">Nov 2022</p>
+        <h4 class="font-serif text-3xl text-on-surface mb-2">PwC HackaDay CTF Competition</h4>
+        <p class="text-lg text-on-surface-variant font-label">Nov 2022</p>
       </div>
     </div>
   </section>
@@ -345,14 +402,11 @@
   <section class="py-32 px-8 max-w-7xl mx-auto" id="contact">
     <div class="bg-primary rounded-xl p-12 md:p-24 text-center text-on-primary overflow-hidden relative">
       <div class="absolute top-0 right-0 w-96 h-96 bg-secondary-dim opacity-20 blur-[120px] rounded-full"></div>
-      <h2 class="font-serif text-5xl md:text-7xl mb-8 relative z-10">Let's build something <span class="italic">meaningful</span>.</h2>
-      <p class="text-lg md:text-xl text-primary-fixed mb-12 max-w-2xl mx-auto opacity-90 relative z-10">
+      <h2 class="font-serif text-7xl md:text-9xl mb-8 relative z-10">Let's build something <span class="italic">meaningful</span>.</h2>
+      <p class="text-2xl md:text-3xl text-primary-fixed mb-12 max-w-2xl mx-auto opacity-90 relative z-10">
         Open for collaboration on scalable systems and innovative software solutions.
       </p>
       <div class="flex flex-col md:flex-row gap-6 justify-center relative z-10">
-        <a class="px-10 py-4 bg-surface text-on-surface font-medium text-sm tracking-widest uppercase hover:bg-surface-container transition-colors" href="mailto:wongwingyin89@gmail.com">
-          Get In Touch
-        </a>
         <div class="flex items-center justify-center gap-6">
           <a class="w-14 h-14 rounded-full border border-primary-container flex items-center justify-center hover:bg-on-primary hover:text-primary transition-all" href="https://www.linkedin.com/in/wing-yin-wong" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
             <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
@@ -371,13 +425,13 @@
 <footer class="w-full py-12 px-8 bg-[#F8F3E8] border-t border-[#353328]/10">
   <div class="flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto">
     <div class="mb-8 md:mb-0">
-      <span class="text-[#353328] font-serif italic text-xl">Wong Wing Yin</span>
-      <p class="text-[#353328]/40 font-sans text-xs tracking-widest uppercase mt-2">© 2025 The Digital Curator. Crafted with intention.</p>
+      <span class="text-[#353328] font-serif italic text-3xl">Wong Wing Yin</span>
+      <p class="text-[#353328]/40 font-sans text-base tracking-widest uppercase mt-2">© 2025 The Digital Curator. Crafted with intention.</p>
     </div>
     <div class="flex gap-8">
-      <a class="text-[#353328]/40 hover:text-[#7B573E] font-sans text-sm tracking-widest uppercase transition-all" href="https://www.linkedin.com/in/wing-yin-wong" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a class="text-[#353328]/40 hover:text-[#7B573E] font-sans text-sm tracking-widest uppercase transition-all" href="https://github.com/WONG-WY" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a class="text-[#353328]/40 hover:text-[#7B573E] font-sans text-sm tracking-widest uppercase transition-all" href="mailto:wongwingyin89@gmail.com">Email</a>
+      <a class="text-[#353328]/40 hover:text-[#7B573E] font-sans text-lg tracking-widest uppercase transition-all" href="https://www.linkedin.com/in/wing-yin-wong" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a class="text-[#353328]/40 hover:text-[#7B573E] font-sans text-lg tracking-widest uppercase transition-all" href="https://github.com/WONG-WY" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a class="text-[#353328]/40 hover:text-[#7B573E] font-sans text-lg tracking-widest uppercase transition-all" href="mailto:wongwingyin89@gmail.com">Email</a>
     </div>
   </div>
 </footer>
@@ -410,8 +464,17 @@
 
   sections.forEach(s => observer.observe(s));
 
-  // Default: highlight Projects on load
   setActive('projects');
+
+  function toggleExp(id) {
+    const panel = document.getElementById(id);
+    const icon = document.getElementById(id + '-icon');
+    const isOpen = !panel.classList.contains('hidden');
+    panel.classList.toggle('hidden', isOpen);
+    icon.textContent = isOpen ? 'add' : 'remove';
+  }
+
+
 </script>
 </body>
 </html>

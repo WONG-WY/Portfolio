@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Privacy Gateway on Microsoft Azure | Rorina Wong</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,600;1,400&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script>
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        colors: {
+          "on-surface": "#353328", "surface-container-lowest": "#ffffff",
+          "surface-container": "#f3ede0", "surface-container-low": "#f8f3e8",
+          "surface-container-highest": "#e8e2d2", "on-surface-variant": "#625f53",
+          "outline-variant": "#b6b2a3", "secondary": "#705771",
+          "primary": "#7b573e", "background": "#fef9ef", "on-primary": "#fff7f4",
+          "primary-container": "#fecdae", "outline": "#7e7b6d"
+        },
+        fontFamily: { body: ["Manrope", "sans-serif"], label: ["Manrope", "sans-serif"] }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: 'Manrope', sans-serif; background-color: #fef9ef; color: #353328; }
+  .font-serif { font-family: 'Newsreader', serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="bg-background text-on-background">
+
+<nav class="fixed top-0 w-full z-50 bg-[#FEF9EF]/80 backdrop-blur-xl border-b border-outline-variant/10">
+  <div class="flex items-center w-3/4 mx-auto px-8 py-5 gap-4">
+    <a href="index.html" class="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all duration-200">
+      <span class="material-symbols-outlined">arrow_back</span>
+      <span class="font-label text-base font-bold tracking-widest uppercase">Back</span>
+    </a>
+  </div>
+</nav>
+
+<main class="pt-28 pb-24 px-8 w-3/4 mx-auto">
+
+  <div class="mb-12">
+    <span class="font-label uppercase tracking-[0.25em] text-base text-secondary mb-4 block">Project</span>
+    <h1 class="font-serif text-6xl md:text-7xl text-on-surface leading-[1.15] mb-6">Privacy Gateway on Microsoft Azure</h1>
+    <p class="text-xl text-on-surface-variant">IP masking &amp; ad-blocking gateway</p>
+  </div>
+
+  <div class="flex flex-wrap gap-3 mb-16">
+    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Azure VM</span>
+    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">OpenVPN</span>
+    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Pi-hole</span>
+    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Linux</span>
+  </div>
+
+  <div class="border-t border-outline-variant/20 pt-12 space-y-10">
+
+    <div>
+      <h2 class="font-serif text-3xl text-on-surface mb-4">Overview</h2>
+      <p class="text-lg text-on-surface-variant leading-relaxed">
+        Deployed a full privacy gateway on Microsoft Azure to provide encrypted browsing and network-level ad blocking. The system combines a VPN server with a DNS sinkhole, giving users a private, ad-free internet experience routed through a cloud VM.
+      </p>
+    </div>
+
+    <div>
+      <h2 class="font-serif text-3xl text-on-surface mb-4">What Was Built</h2>
+      <ul class="space-y-3 text-lg text-on-surface-variant leading-relaxed list-disc list-inside">
+        <li>Deployed an OpenVPN server on an Azure VM to establish encrypted tunnels and mask client IP addresses</li>
+        <li>Integrated a Pi-hole DNS sinkhole with a ~180,000-domain blocklist to block ads and minimize latency</li>
+        <li>Validated IP masking and ad-blocking effectiveness through end-to-end testing with third-party tools</li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="font-serif text-3xl text-on-surface mb-4">Key Outcomes</h2>
+      <ul class="space-y-3 text-lg text-on-surface-variant leading-relaxed list-disc list-inside">
+        <li>Full IP anonymisation confirmed via external IP-check services</li>
+        <li>Significant reduction in ad-related DNS queries across connected devices</li>
+        <li>Demonstrated practical cloud infrastructure and network security skills</li>
+      </ul>
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>
