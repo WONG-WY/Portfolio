@@ -29,10 +29,51 @@
   body { font-family: 'Manrope', sans-serif; background-color: #fef9ef; color: #353328; }
   .font-serif { font-family: 'Newsreader', serif; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  #lightbox.active { display: flex; }
+  #lightbox img { max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 4px; }
+  #lightbox-close {
+    position: absolute; top: 1.25rem; right: 1.5rem;
+    color: #fff; font-size: 2rem; cursor: pointer; line-height: 1; user-select: none;
+  }
+  .gallery-img { cursor: zoom-in; transition: opacity 0.2s; }
+  .gallery-img:hover { opacity: 0.85; }
+
+  .dot-grid {
+    background-image: radial-gradient(circle, #b6b2a350 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-22px) scale(1.04); }
+  }
+  @keyframes float-slow-delayed {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-16px) scale(0.97); }
+  }
+  .animate-float { animation: float-slow 9s ease-in-out infinite; }
+  .animate-float-d { animation: float-slow-delayed 11s ease-in-out infinite; }
 </style>
 </head>
-<body class="bg-background text-on-background">
+<body class="bg-background text-on-surface">
 
+<!-- Lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true">
+  <span id="lightbox-close" aria-label="Close">&times;</span>
+  <img id="lightbox-img" src="" alt="Screenshot enlarged"/>
+</div>
+
+<!-- Nav -->
 <nav class="fixed top-0 w-full z-50 bg-[#FEF9EF]/80 backdrop-blur-xl border-b border-outline-variant/10">
   <div class="flex items-center w-3/4 mx-auto px-8 py-5 gap-4">
     <a href="index.html" class="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all duration-200">
@@ -42,52 +83,161 @@
   </div>
 </nav>
 
-<main class="pt-28 pb-24 px-8 w-3/4 mx-auto">
+<main class="pt-28 pb-24">
 
-  <div class="mb-12">
-    <span class="font-label uppercase tracking-[0.25em] text-base text-secondary mb-4 block">Project</span>
-    <h1 class="font-serif text-6xl md:text-7xl text-on-surface leading-[1.15] mb-6">Full-Stack School Decision-Support Tool</h1>
-    <p class="text-xl text-on-surface-variant">Real-time school comparison platform for smarter decisions</p>
-  </div>
+  <!-- ── 1. Title ── -->
+  <section class="w-3/4 mx-auto px-8 mb-20">
+    <div class="relative overflow-hidden">
+      <div class="pointer-events-none absolute -top-12 -right-16 opacity-20">
+        <div class="animate-float w-56 h-56 rounded-full bg-primary"></div>
+      </div>
+      <div class="pointer-events-none absolute top-8 -right-4 opacity-10">
+        <div class="animate-float-d w-32 h-32 rounded-full bg-secondary"></div>
+      </div>
 
-  <div class="flex flex-wrap gap-3 mb-16">
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Vue.js</span>
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Node.js</span>
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Auth0</span>
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">MongoDB</span>
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Express.js</span>
-  </div>
+      <span class="font-label uppercase tracking-[0.25em] text-base text-secondary mb-4 block">Project</span>
+      <h1 class="font-serif text-6xl md:text-7xl text-on-surface leading-[1.15] mb-8">Full-Stack School Decision-Support Tool</h1>
 
-  <div class="border-t border-outline-variant/20 pt-12 space-y-10">
+      <div class="flex flex-wrap gap-3 mb-8">
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Vue.js</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Node.js</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Express.js</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">MongoDB</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Auth0</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Chart.js</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">JWT</span>
+      </div>
 
-    <div>
-      <h2 class="font-serif text-3xl text-on-surface mb-4">Overview</h2>
-      <p class="text-lg text-on-surface-variant leading-relaxed">
-        A full-stack web platform that helps users compare schools using live government data. Built with a custom authentication layer, real-time API integration, and a resilient data-sync architecture to ensure accuracy and reliability.
+      <p class="text-xl text-on-surface-variant max-w-4xl mb-10">
+        A full-stack web platform that transforms scattered government school data into an interactive, comparable, and visualized decision-making tool for Hong Kong families.
       </p>
-    </div>
 
-    <div>
-      <h2 class="font-serif text-3xl text-on-surface mb-4">What Was Built</h2>
-      <ul class="space-y-3 text-lg text-on-surface-variant leading-relaxed list-disc list-inside">
-        <li>Built a Vue.js and Node.js platform integrating government APIs for real-time school data comparison</li>
-        <li>Implemented Auth0 Headless Authentication (ROPC) to secure APIs with JWTs while retaining a custom UI</li>
-        <li>Engineered a dual-write mechanism via Express.js to sync MongoDB as the single Source of Truth</li>
+    </div>
+  </section>
+
+  <!-- ── 2. Motivation ── -->
+  <section class="w-3/4 mx-auto px-8 mb-20 border-t border-outline-variant/20 pt-16">
+    <h2 class="font-serif text-4xl text-on-surface mb-6">Motivation</h2>
+    <p class="text-xl text-on-surface-variant leading-relaxed max-w-5xl">
+      Choosing a secondary school in Hong Kong means digging through government websites, PDF tables, and disconnected data sources — then manually comparing schools on paper. No existing platform lets families filter, rank, visualize, and compare schools in one place with a clean interface. This project was built to change that: pulling real government data into a single platform where the decision becomes clearer.
+    </p>
+  </section>
+
+  <!-- ── 3. Solution ── -->
+  <section class="dot-grid w-full mb-20">
+    <div class="w-3/4 mx-auto px-8 py-16">
+      <h2 class="font-serif text-4xl text-on-surface mb-10">What I Built</h2>
+      <ul class="space-y-6 max-w-5xl">
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">api</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">Real-time school data</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Integrated Hong Kong Government public APIs to fetch live school information and coordinates, keeping data accurate without manual updates.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">bar_chart</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">Interactive dashboard</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Built a Chart.js visualization layer showing school distributions across type, gender, district, and language — turning raw data into readable charts.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">tune</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">Smart filtering and ranking</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Users can filter schools by multiple criteria simultaneously, and rank results by DSE performance or calculated distance from any given address using the Haversine formula.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">compare</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">Side-by-side comparison</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Two schools can be placed directly side by side, with advantages automatically highlighted — eliminating the need to switch between tabs and take notes manually.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">lock</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">Secure authentication with custom UI</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Implemented Auth0 ROPC flow to protect APIs with JWTs while keeping a fully custom-designed interface, avoiding Auth0's default login page.</p>
+          </div>
+        </li>
       </ul>
     </div>
+  </section>
 
-    <div>
-      <h2 class="font-serif text-3xl text-on-surface mb-4">Key Outcomes</h2>
-      <ul class="space-y-3 text-lg text-on-surface-variant leading-relaxed list-disc list-inside">
-        <li>Secure, token-authenticated API layer with no compromise on custom UI design</li>
-        <li>Reliable data consistency between external APIs and local database via dual-write sync</li>
-        <li>End-to-end full-stack ownership from frontend components to backend data pipelines</li>
-      </ul>
+  <!-- ── 4. Technical Highlight ── -->
+  <section class="w-3/4 mx-auto px-8 mb-20 border-t border-outline-variant/20 pt-16">
+    <h2 class="font-serif text-4xl text-on-surface mb-6">Technical Highlight — Dual-Write Architecture</h2>
+    <p class="text-xl text-on-surface-variant leading-relaxed max-w-5xl mb-8">
+      Auth0's free tier does not allow direct connections to custom databases. This created a problem: users registered in MongoDB would not exist in Auth0, breaking JWT-based API protection.
+    </p>
+    <ul class="space-y-6 max-w-5xl">
+      <li>
+        <span class="font-serif text-2xl text-on-surface block mb-1">Solution:</span>
+        <p class="text-xl text-on-surface-variant leading-relaxed">A dual-write mechanism built into the Express.js registration endpoint — every new user is written to MongoDB first, then immediately created in Auth0 via the Management API.</p>
+      </li>
+      <li>
+        <span class="font-serif text-2xl text-on-surface block mb-1">Result:</span>
+        <p class="text-xl text-on-surface-variant leading-relaxed">MongoDB remains the single source of truth for all user data, while Auth0 handles token issuance exclusively. No third-party login page. No compromise on security.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── 5. Results & Showcase ── -->
+  <section class="w-full bg-surface-container-low border-t border-b border-outline-variant/20 mb-20">
+    <div class="w-3/4 mx-auto px-8 py-16">
+      <h2 class="font-serif text-4xl text-on-surface mb-12">Results &amp; Showcase</h2>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mb-16">
+        <div class="bg-surface-container-lowest border border-outline-variant/20 p-6">
+          <span class="font-serif text-5xl text-primary block mb-1">400+</span>
+          <span class="text-sm text-on-surface-variant uppercase tracking-widest leading-snug">HK secondary schools indexed</span>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant/20 p-6">
+          <span class="font-serif text-5xl text-primary block mb-1">5</span>
+          <span class="text-sm text-on-surface-variant uppercase tracking-widest leading-snug">Filtering dimensions</span>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant/20 p-6">
+          <span class="font-serif text-5xl text-primary block mb-1">3</span>
+          <span class="text-sm text-on-surface-variant uppercase tracking-widest leading-snug">Ranking modes</span>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant/20 p-6 col-span-2 md:col-span-1 lg:col-span-2">
+          <span class="font-serif text-5xl text-primary block mb-1">2-layer</span>
+          <span class="text-sm text-on-surface-variant uppercase tracking-widest leading-snug">Auth — MongoDB + Auth0 dual-write</span>
+        </div>
+      </div>
+
     </div>
-
-  </div>
+  </section>
 
 </main>
+
+<script>
+  function openLightbox(src, alt) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+</script>
 
 </body>
 </html>

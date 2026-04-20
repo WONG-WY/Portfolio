@@ -29,10 +29,67 @@
   body { font-family: 'Manrope', sans-serif; background-color: #fef9ef; color: #353328; }
   .font-serif { font-family: 'Newsreader', serif; }
   .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+  /* Lightbox */
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  #lightbox.active { display: flex; }
+  #lightbox img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 4px;
+  }
+  #lightbox-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.5rem;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    user-select: none;
+  }
+  .gallery-img {
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+  }
+  .gallery-img:hover { opacity: 0.85; }
+
+  /* Dot grid background */
+  .dot-grid {
+    background-image: radial-gradient(circle, #b6b2a350 1px, transparent 1px);
+    background-size: 28px 28px;
+  }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-22px) scale(1.04); }
+  }
+  @keyframes float-slow-delayed {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-16px) scale(0.97); }
+  }
+  .animate-float { animation: float-slow 9s ease-in-out infinite; }
+  .animate-float-d { animation: float-slow-delayed 11s ease-in-out infinite; }
 </style>
 </head>
-<body class="bg-background text-on-background">
+<body class="bg-background text-on-surface">
 
+<!-- Lightbox -->
+<div id="lightbox" role="dialog" aria-modal="true">
+  <span id="lightbox-close" aria-label="Close">&times;</span>
+  <img id="lightbox-img" src="" alt="Screenshot enlarged"/>
+</div>
+
+<!-- Nav -->
 <nav class="fixed top-0 w-full z-50 bg-[#FEF9EF]/80 backdrop-blur-xl border-b border-outline-variant/10">
   <div class="flex items-center w-3/4 mx-auto px-8 py-5 gap-4">
     <a href="index.html" class="inline-flex items-center gap-2 text-primary hover:gap-3 transition-all duration-200">
@@ -42,51 +99,218 @@
   </div>
 </nav>
 
-<main class="pt-28 pb-24 px-8 w-3/4 mx-auto">
+<main class="pt-28 pb-24">
 
-  <div class="mb-12">
-    <span class="font-label uppercase tracking-[0.25em] text-base text-secondary mb-4 block">Project</span>
-    <h1 class="font-serif text-6xl md:text-7xl text-on-surface leading-[1.15] mb-6">Privacy Gateway on Microsoft Azure</h1>
-    <p class="text-xl text-on-surface-variant">IP masking &amp; ad-blocking gateway</p>
-  </div>
+  <!-- ── 1. Title ── -->
+  <section class="w-3/4 mx-auto px-8 mb-20">
+    <div class="relative overflow-hidden">
+      <!-- Floating circles -->
+      <div class="pointer-events-none absolute -top-12 -right-16 opacity-20">
+        <div class="animate-float w-56 h-56 rounded-full bg-primary"></div>
+      </div>
+      <div class="pointer-events-none absolute top-8 -right-4 opacity-10">
+        <div class="animate-float-d w-32 h-32 rounded-full bg-secondary"></div>
+      </div>
 
-  <div class="flex flex-wrap gap-3 mb-16">
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Azure VM</span>
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">OpenVPN</span>
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Pi-hole</span>
-    <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Linux</span>
-  </div>
-
-  <div class="border-t border-outline-variant/20 pt-12 space-y-10">
-
-    <div>
-      <h2 class="font-serif text-3xl text-on-surface mb-4">Overview</h2>
-      <p class="text-lg text-on-surface-variant leading-relaxed">
-        Deployed a full privacy gateway on Microsoft Azure to provide encrypted browsing and network-level ad blocking. The system combines a VPN server with a DNS sinkhole, giving users a private, ad-free internet experience routed through a cloud VM.
+      <span class="font-label uppercase tracking-[0.25em] text-base text-secondary mb-4 block">Project</span>
+      <h1 class="font-serif text-6xl md:text-7xl text-on-surface leading-[1.15] mb-8">Privacy Gateway on Microsoft Azure</h1>
+      <div class="flex flex-wrap gap-3 mb-8">
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Microsoft Azure</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">OpenVPN</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Pi-hole</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Linux</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Network Security Group</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">DNS</span>
+        <span class="px-4 py-2 bg-surface-container text-on-surface-variant text-base font-medium tracking-wide border border-outline-variant/20">Cloud Infrastructure</span>
+      </div>
+      <p class="text-xl text-on-surface-variant max-w-4xl mb-10">
+        A self-hosted VPN and DNS sinkhole on a cloud VM — encrypted browsing, network-level ad blocking, and full traffic control without third-party services.
       </p>
+      <a href="#demo" class="inline-flex items-center gap-3 bg-primary text-on-primary px-7 py-4 text-base font-bold tracking-widest uppercase hover:bg-primary/85 transition-all duration-200 group">
+        <span class="material-symbols-outlined text-2xl group-hover:scale-110 transition-transform duration-200">play_circle</span>
+        Watch Demo
+      </a>
     </div>
+  </section>
 
-    <div>
-      <h2 class="font-serif text-3xl text-on-surface mb-4">What Was Built</h2>
-      <ul class="space-y-3 text-lg text-on-surface-variant leading-relaxed list-disc list-inside">
-        <li>Deployed an OpenVPN server on an Azure VM to establish encrypted tunnels and mask client IP addresses</li>
-        <li>Integrated a Pi-hole DNS sinkhole with a ~180,000-domain blocklist to block ads and minimize latency</li>
-        <li>Validated IP masking and ad-blocking effectiveness through end-to-end testing with third-party tools</li>
+  <!-- ── 2. Motivation ── -->
+  <section class="w-3/4 mx-auto px-8 mb-20 border-t border-outline-variant/20 pt-16">
+    <h2 class="font-serif text-4xl text-on-surface mb-6">Motivation</h2>
+    <p class="text-xl text-on-surface-variant leading-relaxed max-w-5xl">
+      Commercial VPNs often trade one point of surveillance for another by routing traffic through third-party infrastructure. This project was driven by the need for full-stack ownership:
+    </p>
+    <ul class="mt-8 max-w-none space-y-4">
+      <li class="flex items-baseline gap-3">
+        <span class="font-serif text-2xl text-on-surface shrink-0">Trust:</span>
+        <span class="text-xl text-on-surface-variant leading-relaxed">Eliminating third-party intermediaries for data handling.</span>
+      </li>
+      <li class="flex items-baseline gap-3">
+        <span class="font-serif text-2xl text-on-surface shrink-0">Control:</span>
+        <span class="text-xl text-on-surface-variant leading-relaxed">Managing the server, DNS resolver, firewall, and encryption keys personally.</span>
+      </li>
+      <li class="flex items-baseline gap-3">
+        <span class="font-serif text-2xl text-on-surface shrink-0">Infrastructure:</span>
+        <span class="text-xl text-on-surface-variant leading-relaxed">Leveraging Microsoft Azure to provision and validate a secure cloud environment from scratch.</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── 3. Solution ── -->
+  <section class="dot-grid w-full mb-20">
+    <div class="w-3/4 mx-auto px-8 py-16">
+      <h2 class="font-serif text-4xl text-on-surface mb-10">What I Built</h2>
+      <ul class="space-y-6 max-w-5xl">
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">lock</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">OpenVPN server on Azure VM</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Provisioned a Linux VM on Azure and configured OpenVPN to establish encrypted tunnels for all connected clients, masking their true IP addresses behind the VM's public IP.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">dns</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">Pi-hole DNS sinkhole with curated blocklist</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Deployed Pi-hole alongside the VPN, loading a 179,401-domain blocklist that intercepts ad, tracker, and telemetry DNS queries at the network layer — before any content loads.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">security</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">Network Security Group (NSG) firewall rules</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Configured Azure NSG inbound rules to expose only the required ports (OpenVPN UDP, Pi-hole DNS, and admin access), blocking all other external traffic by default.</p>
+          </div>
+        </li>
+        <li class="flex gap-4">
+          <span class="material-symbols-outlined text-primary mt-0.5 shrink-0">verified_user</span>
+          <div>
+            <span class="text-xl font-medium text-on-surface">Cloudflare DoH as upstream resolver</span>
+            <p class="text-lg text-on-surface-variant mt-1 leading-relaxed">Set Pi-hole's upstream DNS to Cloudflare's DNS-over-HTTPS endpoint, so even the DNS queries that escape the blocklist are encrypted in transit and not visible to the ISP.</p>
+          </div>
+        </li>
       </ul>
     </div>
+  </section>
 
-    <div>
-      <h2 class="font-serif text-3xl text-on-surface mb-4">Key Outcomes</h2>
-      <ul class="space-y-3 text-lg text-on-surface-variant leading-relaxed list-disc list-inside">
-        <li>Full IP anonymisation confirmed via external IP-check services</li>
-        <li>Significant reduction in ad-related DNS queries across connected devices</li>
-        <li>Demonstrated practical cloud infrastructure and network security skills</li>
-      </ul>
+  <!-- ── 4. Technical Highlight ── -->
+  <section class="w-3/4 mx-auto px-8 mb-20 border-t border-outline-variant/20 pt-16">
+    <h2 class="font-serif text-4xl text-on-surface mb-6">Technical Highlight — DNS Routing</h2>
+    <p class="text-xl text-on-surface-variant leading-relaxed max-w-5xl mb-8">
+      The primary challenge was ensuring that all VPN clients utilized the internal Pi-hole resolver without manual client-side configuration.
+    </p>
+    <ul class="space-y-6 max-w-5xl">
+      <li>
+        <span class="font-serif text-2xl text-on-surface block mb-1">Solution:</span>
+        <p class="text-xl text-on-surface-variant leading-relaxed">I implemented custom DNS push options within the OpenVPN server configuration.</p>
+      </li>
+      <li>
+        <span class="font-serif text-2xl text-on-surface block mb-1">Result:</span>
+        <p class="text-xl text-on-surface-variant leading-relaxed">Every connected device automatically receives the VM's internal IP as its DNS server. This creates a Zero-Config experience — any device connecting to the VPN instantly inherits ad-blocking and encrypted DNS capabilities regardless of the OS.</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ── 5. Results & Showcase ── -->
+  <section class="w-full bg-surface-container-low border-t border-b border-outline-variant/20 mb-20">
+    <div class="w-3/4 mx-auto px-8 py-16">
+      <h2 class="font-serif text-4xl text-on-surface mb-12">Results &amp; Showcase</h2>
+
+      <!-- Stats -->
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-12 max-w-2xl">
+        <div class="bg-surface-container-lowest border border-outline-variant/20 p-6">
+          <span class="font-serif text-5xl text-primary block mb-1">35.7%</span>
+          <span class="text-sm text-on-surface-variant uppercase tracking-widest">DNS block rate</span>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant/20 p-6">
+          <span class="font-serif text-5xl text-primary block mb-1">179K</span>
+          <span class="text-sm text-on-surface-variant uppercase tracking-widest">Domains blocked</span>
+        </div>
+        <div class="bg-surface-container-lowest border border-outline-variant/20 p-6">
+          <span class="font-serif text-5xl text-primary block mb-1">100%</span>
+          <span class="text-sm text-on-surface-variant uppercase tracking-widest">IP anonymisation</span>
+        </div>
+      </div>
+
+      <!-- Blocklist note -->
+      <p class="text-lg text-on-surface-variant leading-relaxed max-w-4xl mb-16 border-l-2 border-primary/40 pl-4">
+        The 179,401-domain blocklist was assembled by merging several community-maintained lists (ads, trackers, malware, telemetry) and pruning false positives that broke legitimate services — balancing coverage against usability.
+      </p>
+
+      <!-- Image Gallery -->
+      <h3 class="font-serif text-2xl text-on-surface mb-6">Screenshots</h3>
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-16">
+        <img class="gallery-img w-full h-44 object-cover border border-outline-variant/30 bg-surface-container"
+             src="src/components/Network Security Group.png"
+             alt="Azure Network Security Group rules"
+             onclick="openLightbox(this.src, this.alt)"/>
+        <img class="gallery-img w-full h-44 object-cover border border-outline-variant/30 bg-surface-container"
+             src="src/components/OpenVPN Connect.png"
+             alt="OpenVPN Connect client"
+             onclick="openLightbox(this.src, this.alt)"/>
+        <img class="gallery-img w-full h-44 object-cover border border-outline-variant/30 bg-surface-container"
+             src="src/components/openVPNAS.png"
+             alt="OpenVPN Access Server service running in terminal"
+             onclick="openLightbox(this.src, this.alt)"/>
+        <img class="gallery-img w-full h-44 object-cover border border-outline-variant/30 bg-surface-container"
+             src="src/components/OpenVPNWebUI.png"
+             alt="OpenVPN Access Server web UI — active configuration"
+             onclick="openLightbox(this.src, this.alt)"/>
+        <img class="gallery-img w-full h-44 object-cover border border-outline-variant/30 bg-surface-container"
+             src="src/components/PiHole.png"
+             alt="Pi-hole FTL service running in terminal"
+             onclick="openLightbox(this.src, this.alt)"/>
+        <img class="gallery-img w-full h-44 object-cover border border-outline-variant/30 bg-surface-container"
+             src="src/components/PiHoleBlockList.png"
+             alt="Pi-hole blocklist configuration"
+             onclick="openLightbox(this.src, this.alt)"/>
+        <img class="gallery-img w-full h-44 object-cover border border-outline-variant/30 bg-surface-container"
+             src="src/components/PiHoleWebUI.png"
+             alt="Pi-hole dashboard — 35.7% block rate, 179,401 domains"
+             onclick="openLightbox(this.src, this.alt)"/>
+        <img class="gallery-img w-full h-44 object-cover border border-outline-variant/30 bg-surface-container"
+             src="src/components/VM details.png"
+             alt="Azure VM details"
+             onclick="openLightbox(this.src, this.alt)"/>
+      </div>
+
+      <!-- Video -->
+      <h3 id="demo" class="font-serif text-2xl text-on-surface mb-6 scroll-mt-28">Demo</h3>
+      <div class="w-full border border-outline-variant/30 bg-surface-container-lowest">
+        <video controls class="w-full" preload="metadata">
+          <source src="src/demo.mkv" type="video/x-matroska"/>
+          Your browser does not support this video format.
+        </video>
+      </div>
+
     </div>
+  </section>
 
-  </div>
 
 </main>
+
+<script>
+  function openLightbox(src, alt) {
+    const lb = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = src;
+    img.alt = alt;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  document.getElementById('lightbox-close').addEventListener('click', closeLightbox);
+  document.getElementById('lightbox').addEventListener('click', function(e) {
+    if (e.target === this) closeLightbox();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+</script>
 
 </body>
 </html>
